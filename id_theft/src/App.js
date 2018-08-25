@@ -1,84 +1,75 @@
-import React, { Component } from "react";
-import { provider, auth } from "./firebase/client";
-import { func } from "prop-types";
+import React, { Component, Fragment } from "react";
+import FacebookLogin from "react-facebook-login";
 
-// Layout
-import Navbar from './Layout/Navbar';
-import Footer from './Layout/Footer';
-
-// Components
-import Landing from './Components/Landing/Landing';
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: null,
-      token: ""
-    };
-  }
-
-  componentWillMount() {
-    auth().onAuthStateChanged(function(user, token) {
-      if (user && token) {
-        this.setState({
-          user: this.user,
-          token: this.token
-        });
-        console.log(this.state.user);
-        console.log(this.state.token);
-      }
-    });
-  }
-
-  login = () => {
-    auth()
-      .signInWithPopup(provider)
-      .then(function(result) {
-        this.setState({
-          user: result.user,
-          token: result.credential.accessToken
-        });
-        console.log(this.state.user);
-        console.log(this.state.token);
-      })
-      .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        console.log(
-          errorCode + "/n" + errorMessage + "/n" + email + "/n" + credential
-        );
-      });
+export default class Facebook extends Component {
+  state = {
+    isLoggedIn: false,
+    userID: "",
+    name: "",
+    email: "",
+    picture: "",
+    imgArray: []
   };
 
-  logout = () => {
-    auth()
-      .signOut()
-      .then(() => {
-        this.setState({
-          user: null,
-          token: ""
-        });
-        console.log(this.state.user);
-        console.log(this.state.token);
-      });
+  componentClicked = () => {
+    console.log("clicked component");
+  };
+
+  responseFacebook = response => {
+    console.log(response);
+    this.setState({
+      isLoggedIn: true,
+      userID: response.userID,
+      name: response.name,
+      email: response.email,
+      picture: response.picture.data.url
+    });
+  };
+
+  getFacebookData = () => {
+    window.FB.api(
+      "/me",
+      "GET",
+      { fields: "email,gender,hometown,id,photos{link}" },
+      function(response) {
+        // this.setState({
+        //   imgArray: response.photos.data
+        // });
+        console.log(
+          response.photos.data.map(function(img) {
+            return img.link;
+          })
+        );
+      }
+    );
   };
 
   render() {
-    const { user } = this.state;
-    return (
-      <div>
-        <Navbar />
-        <Landing />
-        <Footer />
-        <p> {user ? `Hi, ${user.displayName}!` : "Hi!"} </p>{" "}
-        <button onClick={this.login}>Login with Facebook </button>
-        <button onClick={this.logout}>Logout </button>{" "}
-      </div>
-    );
+    let fbContent;
+
+    if (this.state.isLoggedIn) {
+      fbContent = (
+        <Fragment>
+          <img src={this.state.picture} alt={this.state.name} />
+          <h2>Welcome {this.state.name}</h2>
+          Email: {this.state.email}
+          <button onClick={this.getFacebookData}>Click Me!</button>
+        </Fragment>
+      );
+    } else {
+      fbContent = (
+        <Fragment>
+          <FacebookLogin
+            appId="1674319169346674"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={this.componentClicked}
+            callback={this.responseFacebook}
+          />
+        </Fragment>
+      );
+    }
+
+    return <Fragment> {fbContent} </Fragment>;
   }
 }
-
-export default App;
