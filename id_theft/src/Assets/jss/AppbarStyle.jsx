@@ -7,6 +7,10 @@ const appbarStyles = theme => ({
   },
   title:{
   },
+  img:{
+    fill: '#ff0000',
+    color: colors.white,
+  },
   appbar:{
     backgroundColor: 'transparent',
     boxShadow: 'none',

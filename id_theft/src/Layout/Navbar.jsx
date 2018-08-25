@@ -5,6 +5,11 @@ import appbarStyle from "../Assets/jss/AppbarStyle";
 // Material UI
 import { withStyles, Button, AppBar, Typography, Toolbar  } from "@material-ui/core";
 
+// img
+import bitcoin from '../Assets/img/bitcoin.svg'; 
+import paypal from '../Assets/img/paypal.svg';
+
+
 
 class Navbar extends Component {
   render() {
@@ -31,7 +36,7 @@ class Navbar extends Component {
                 </Button>
 
                 <Button color="primary" className={classes.button}>
-                  Donate
+                  Donate <img src={bitcoin} alt={"bitcoin"} className={classes.img} /> <img src={paypal} alt={"paypal"} className={classes.img} /> 
                 </Button>
 
                 <Button variant="extendedFab" className={classes.notifyMe}>
