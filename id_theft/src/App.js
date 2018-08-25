@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { provider, auth } from "./firebase/client";
 import { func } from "prop-types";
 
+// Layout
+import Navbar from './Layout/Navbar';
+import Footer from './Layout/Footer';
+
+// Components
+import Landing from './Components/Landing/Landing';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +69,10 @@ class App extends Component {
   render() {
     const { user } = this.state;
     return (
-      <div className="App">
+      <div>
+        <Navbar />
+        <Landing />
+        <Footer />
         <p> {user ? `Hi, ${user.displayName}!` : "Hi!"} </p>{" "}
         <button onClick={this.login}>Login with Facebook </button>
         <button onClick={this.logout}>Logout </button>{" "}

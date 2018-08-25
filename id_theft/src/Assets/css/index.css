@@ -8,6 +8,8 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   height: 100%;
+  color: #ffffff;
+  background-color: #0C1014;
 }
 
 h1,
@@ -16,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #162440;
+  color: #ffffff;
 }
 
 .container {
