@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { provider, auth } from "./firebase/client";
-import "./App.css";
 import { func } from "prop-types";
 
 class App extends Component {
