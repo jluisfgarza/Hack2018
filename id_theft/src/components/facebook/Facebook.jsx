@@ -7,7 +7,8 @@ export default class Facebook extends Component {
     userID: "",
     name: "",
     email: "",
-    picture: ""
+    picture: "",
+    imgArray: []
   };
 
   componentClicked = () => {
@@ -25,6 +26,24 @@ export default class Facebook extends Component {
     });
   };
 
+  getFacebookData = () => {
+    window.FB.api(
+      "/me",
+      "GET",
+      { fields: "email,gender,hometown,id,photos{link}" },
+      function(response) {
+        // this.setState({
+        //   imgArray: response.photos.data
+        // });
+        console.log(
+          response.photos.data.map(function(img) {
+            return img.link;
+          })
+        );
+      }
+    );
+  };
+
   render() {
     let fbContent;
 
@@ -34,17 +53,20 @@ export default class Facebook extends Component {
           <img src={this.state.picture} alt={this.state.name} />
           <h2>Welcome {this.state.name}</h2>
           Email: {this.state.email}
+          <button onClick={this.getFacebookData}>Click Me!</button>
         </Fragment>
       );
     } else {
       fbContent = (
-        <FacebookLogin
-          appId="1674319169346674"
-          autoLoad={true}
-          fields="name,email,picture"
-          onClick={this.componentClicked}
-          callback={this.responseFacebook}
-        />
+        <Fragment>
+          <FacebookLogin
+            appId="1674319169346674"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={this.componentClicked}
+            callback={this.responseFacebook}
+          />
+        </Fragment>
       );
     }
 
