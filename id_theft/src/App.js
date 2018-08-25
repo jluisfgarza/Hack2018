@@ -8,8 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
-      token: "",
-
+      token: ""
     };
   }
 
@@ -20,6 +19,8 @@ class App extends Component {
           user: this.user,
           token: this.token
         });
+        console.log(this.state.user);
+        console.log(this.state.token);
       }
     });
   }
@@ -27,16 +28,22 @@ class App extends Component {
   login = () => {
     auth()
       .signInWithPopup(provider)
-      .then(({ user, token }) => {
+      .then(function(result) {
         this.setState({
-          user: this.user,
-          token: this.token
+          user: result.user,
+          token: result.credential.accessToken
         });
-      }).catch(function(error){
+        console.log(this.state.user);
+        console.log(this.state.token);
+      })
+      .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         var email = error.email;
         var credential = error.credential;
+        console.log(
+          errorCode + "/n" + errorMessage + "/n" + email + "/n" + credential
+        );
       });
   };
 
@@ -48,6 +55,8 @@ class App extends Component {
           user: null,
           token: ""
         });
+        console.log(this.state.user);
+        console.log(this.state.token);
       });
   };
 
