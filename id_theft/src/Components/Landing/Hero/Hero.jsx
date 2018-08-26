@@ -1,12 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  CircularProgress
-} from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 // Styles
 import HeroStyle from "../../../Assets/jss/HeroStyles";
 
@@ -23,7 +17,7 @@ class Hero extends Component {
     name: "",
     email: "",
     picture: "",
-    api2: {},
+    api2: [],
     loadingAPI2: true
   };
 
@@ -71,21 +65,14 @@ class Hero extends Component {
           <h2>Welcome {this.state.name}</h2>
           Email: {this.state.email}
         </div>
-        <h1>Hola</h1>
 
-        {Object.keys(this.state.api2).map(item => (
-          <div>
-            {item["pages"].forEach(element => {
-              <h2>{element.page}</h2>;
-            })}
-          </div>
-        ))}
         {this.state.loadingAPI2 ? (
-          <CircularProgress size={50} />
+          <CircularProgress className={classes.center} size={50} />
         ) : (
           <Fragment>
-            <ListSubheader component="div"> Completed </ListSubheader>
-            <List dense={true} />
+            <div className={classes.codeStyle}>
+              <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+            </div>
           </Fragment>
         )}
       </Fragment>
