@@ -13,21 +13,10 @@ export default class Facebook extends Component {
       name: "",
       email: "",
       picture: "",
-      api1: [],
-      api2: null
+      api1: {},
+      api2: {}
     };
   }
-
-  /*
-   <img src={this.state.picture} alt={this.state.name} />
-    <h2>Welcome {this.state.name}</h2>
-    Email: {this.state.email}
-    <button onClick={this.getFacebookData}>Click Me!</button>
-  */
-
-  componentClicked = () => {
-    // console.log("clicked component");
-  };
 
   responseFacebook = response => {
     // console.log(response);
@@ -43,6 +32,8 @@ export default class Facebook extends Component {
       email: response.email,
       picture: response.picture.data.url
     });
+
+    this.incandescentRequest();
   };
 
   getFacebookData = () => {
@@ -141,21 +132,7 @@ export default class Facebook extends Component {
     let fbContent;
 
     if (this.state.isLoggedIn) {
-      fbContent = <Fragment>
-        <img src={this.state.picture} alt={this.state.name} />
-        <h2>Welcome {this.state.name}</h2>
-        Email: {this.state.email}
-      </Fragment>(this.state.api2) ? (
-        <Fragment>
-          <button onClick={this.getFacebookData}>Click Me!</button>
-        </Fragment>
-      ) : (
-        <Fragment>
-          {this.state.api2.map(site => (
-            <h4>{site}</h4>
-          ))}
-        </Fragment>
-      );
+      fbContent = <Fragment />;
     } else {
       fbContent = (
         <Fragment>
@@ -163,8 +140,8 @@ export default class Facebook extends Component {
             appId="1674319169346674"
             autoLoad={true}
             fields="name,email,picture"
-            onClick={this.componentClicked}
-            callback={this.incandescentRequest}
+            // onClick={this.componentClicked}
+            callback={this.responseFacebook}
           />
         </Fragment>
       );
