@@ -26,7 +26,7 @@ const heroStyle = theme => ({
     },
   },
   img:{
-    maxWidth: '500px',
+    maxWidth: '350px',
     margin: '0 auto',
     display: 'block',
     [theme.breakpoints.down("sm")]: {

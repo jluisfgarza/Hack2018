@@ -30,7 +30,6 @@ const appbarStyles = theme => ({
     },
   },
   
-  
   a: {
     textDecoration: "none",
     color: colors.white,
@@ -39,6 +38,9 @@ const appbarStyles = theme => ({
     margin: 0,
     padding: '10px',
     fontSize: '20px',
+    [theme.breakpoints.down("md")]: {
+      marginRight: '18px',
+    },
     [theme.breakpoints.only("xs")]: {
       marginRight: '10px',
     },
@@ -51,6 +53,9 @@ const appbarStyles = theme => ({
     borderRadius: '25px',
     [theme.breakpoints.only("xs")]: {
       margin: '10px 0',
+    },
+    [theme.breakpoints.down("md")]: {
+      marginRight: '18px',
     },
   },
   inside:{

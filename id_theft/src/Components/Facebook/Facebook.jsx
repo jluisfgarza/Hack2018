@@ -14,19 +14,34 @@ export default class Facebook extends Component {
     imgArray: []
   };
 
+
+  /*
+   <img src={this.state.picture} alt={this.state.name} />
+    <h2>Welcome {this.state.name}</h2>
+    Email: {this.state.email}
+    <button onClick={this.getFacebookData}>Click Me!</button>
+  */
+  
+
   componentClicked = () => {
-    console.log("clicked component");
+    // console.log("clicked component");
   };
 
   responseFacebook = response => {
-    console.log(response);
+    // console.log(response);
+
     this.setState({
+      isLoggedIn: true,
+    });
+
+    this.props.sendData({
       isLoggedIn: true,
       userID: response.userID,
       name: response.name,
       email: response.email,
       picture: response.picture.data.url
     });
+
   };
 
   getFacebookData = () => {
@@ -53,7 +68,7 @@ export default class Facebook extends Component {
               { headers: { "x-api-key": "d7d9c0fada0bf4294da373362b4c1f4a" } }
             )
             .then(res => {
-              console.log(res);
+              // console.log(res);
             });
         }
       }
@@ -68,10 +83,7 @@ export default class Facebook extends Component {
     if (this.state.isLoggedIn) {
       fbContent = (
         <Fragment>
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
-          <button onClick={this.getFacebookData}>Click Me!</button>
+         
         </Fragment>
       );
     } else {
@@ -83,6 +95,7 @@ export default class Facebook extends Component {
             fields="name,email,picture"
             onClick={this.componentClicked}
             callback={this.responseFacebook}
+            
           />
         </Fragment>
       );
