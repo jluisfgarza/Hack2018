@@ -43,15 +43,33 @@ export default class Facebook extends Component {
             .post(
               `https://api.infringement.report/2.0/search`,
               {
-                images: response.photos.data.map(function(img) {
-                  return img.images[0].source;
-                }),
+                // images: response.photos.data.map(function(img) {
+                //   return img.images[0].source;
+                // }),
+                images: response.photos.data.images[0].source,
                 list_label: response.id
               },
               { headers: { "x-api-key": "d7d9c0fada0bf4294da373362b4c1f4a" } }
             )
             .then(res => {
               console.log(res);
+              setInterval(45000, () => {
+                console.log("hola");
+                axios
+                  .get(
+                    `https://api.infringement.report/2.0/list/${
+                      res.data.list_id
+                    }/query?use_ignore_lists=false&q=*`
+                  )
+                  .then(function(response) {
+                    // handle success
+                    console.log(response);
+                  })
+                  .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                  });
+              });
             });
         }
       }
