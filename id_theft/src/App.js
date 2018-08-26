@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 // import "./App.css";
 
-import Facebook from "./components/facebook/Facebook";
-import Navbar from "./layout/Navbar";
+import Facebook from "./Components/Facebook/Facebook";
+import Navbar from "./Layout/Navbar";
 import Landing from "./Components/Landing/Landing";
-import Footer from "./layout/Footer";
+import Footer from "./Layout/Footer";
 
 class App extends Component {
   render() {
