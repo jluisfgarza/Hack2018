@@ -2,17 +2,21 @@ import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
 
-// import facebookStyle from "../../Assets/jss/FacebookStyle";
+var md5 = require("md5");
 
 export default class Facebook extends Component {
-  state = {
-    isLoggedIn: false,
-    userID: "",
-    name: "",
-    email: "",
-    picture: "",
-    imgArray: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      userID: "",
+      name: "",
+      email: "",
+      picture: "",
+      api1: [],
+      api2: null
+    };
+  }
 
   componentClicked = () => {
     console.log("clicked component");
@@ -33,7 +37,7 @@ export default class Facebook extends Component {
     window.FB.api(
       "/me",
       "GET",
-      { fields: "email,gender,id,photos{images}" },
+      { fields: "email,gender,id,photos.limit(1){images}" },
       function(response) {
         if (response) {
           // console.log(
@@ -48,15 +52,16 @@ export default class Facebook extends Component {
                 // images: response.photos.data.map(function(img) {
                 //   return img.images[0].source;
                 // }),
-                images: response.photos.data.images[0].source,
+                images: [
+                  "http://www.gstatic.com/tv/thumb/persons/589228/589228_v9_ba.jpg"
+                ],
                 list_label: response.id
               },
-              { headers: { "x-api-key": "d7d9c0fada0bf4294da373362b4c1f4a" } }
+              { headers: { "x-api-key": "bef0c55ff68e3947df8bcc8859459754" } }
             )
             .then(res => {
               console.log(res);
               setInterval(45000, () => {
-                console.log("hola");
                 axios
                   .get(
                     `https://api.infringement.report/2.0/list/${
@@ -78,18 +83,65 @@ export default class Facebook extends Component {
     );
   };
 
-  render() {
+  incandescentRequest = () => {
+    var self = this;
+    window.FB.api(
+      "/me",
+      "GET",
+      { fields: "email,gender,id,photos.limit(5){images}" },
+      function(response) {
+        if (response) {
+          console.log(
+            response.photos.data.map(function(img) {
+              return img.images[0].source;
+            })
+          );
+          var incan_client = require("node-incandescent-client").client;
+          var client = new incan_client(
+            "7484",
+            "a0c2a625a07d0eea3f39c515dc9e8817"
+          );
+          client.addImageUrl(
+            "http://www.gstatic.com/tv/thumb/persons/589228/589228_v9_ba.jpg"
+            // response.photos.data.map(function(img) {
+            //   return img.images[0].source;
+            // })
+          );
+          client.assemble();
 
+          client.sendRequest(function(projectId) {
+            console.log("ProjectID: " + projectId);
+
+            client.getResults(projectId, function(data) {
+              console.log(data);
+              self.setState({
+                api2: data
+              });
+            });
+          });
+        }
+      }
+    );
+  };
+
+  render() {
     // const { classes } = this.props;
     let fbContent;
 
     if (this.state.isLoggedIn) {
-      fbContent = (
+      fbContent = <Fragment>
+        <img src={this.state.picture} alt={this.state.name} />
+        <h2>Welcome {this.state.name}</h2>
+        Email: {this.state.email}
+      </Fragment>(this.state.api2) ? (
         <Fragment>
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
           <button onClick={this.getFacebookData}>Click Me!</button>
+        </Fragment>
+      ) : (
+        <Fragment>
+          {this.state.api2.map(site => (
+            <h4>{site}</h4>
+          ))}
         </Fragment>
       );
     } else {
@@ -100,7 +152,7 @@ export default class Facebook extends Component {
             autoLoad={true}
             fields="name,email,picture"
             onClick={this.componentClicked}
-            callback={this.responseFacebook}
+            callback={this.incandescentRequest}
           />
         </Fragment>
       );
