@@ -12,7 +12,7 @@ class Footer extends Component {
     return (
       <Fragment>
         <div className={classes.root}>
-            <h1>Footer</h1>
+            
         </div>
       </Fragment>
     );

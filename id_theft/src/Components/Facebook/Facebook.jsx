@@ -18,13 +18,25 @@ export default class Facebook extends Component {
     };
   }
 
+  /*
+   <img src={this.state.picture} alt={this.state.name} />
+    <h2>Welcome {this.state.name}</h2>
+    Email: {this.state.email}
+    <button onClick={this.getFacebookData}>Click Me!</button>
+  */
+
   componentClicked = () => {
-    console.log("clicked component");
+    // console.log("clicked component");
   };
 
   responseFacebook = response => {
-    console.log(response);
+    // console.log(response);
+
     this.setState({
+      isLoggedIn: true
+    });
+
+    this.props.sendData({
       isLoggedIn: true,
       userID: response.userID,
       name: response.name,

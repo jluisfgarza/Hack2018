@@ -54,3 +54,11 @@ Facebook
   width: 50%;
   min-width: 300px;
 }
+
+@media (max-width: 599px) {
+  .kep-login-facebook.metro {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
