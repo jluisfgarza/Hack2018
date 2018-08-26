@@ -22,7 +22,8 @@ export default class Facebook extends Component {
       userID: response.userID,
       name: response.name,
       email: response.email,
-      picture: response.picture.data.url
+      picture: response.picture.data.url,
+      recognitionData: []
     });
 
     // this.getFacebookData();
@@ -93,6 +94,28 @@ export default class Facebook extends Component {
           //     return img.images[0].source;
           //   })
           // );
+          axios
+            .post(
+              `https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze?visualFeatures=Categories,Description,Color&details=&language=en`,
+              {
+                url:
+                  "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
+              },
+              {
+                headers: {
+                  "Ocp-Apim-Subscription-Key":
+                    "2c072f6c5b06455c871fdd6e2f00cad2",
+                  "Content-Type": "application/json"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+              this.setState({
+                recognitionData: res.data
+              });
+            });
+
           var incan_client = require("node-incandescent-client").client;
           var client = new incan_client(
             "7484",
@@ -102,6 +125,8 @@ export default class Facebook extends Component {
           //   return img.images[0].source;
           // });
           // for (let index = 0; index < imagenes.length; index++) {
+          //   console.log(imagenes[index]);
+
           client.addImageUrl(
             "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
             // imagenes[index]
