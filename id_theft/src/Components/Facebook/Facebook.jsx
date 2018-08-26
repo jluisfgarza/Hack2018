@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
+import axios from "axios";
 
 export default class Facebook extends Component {
   state = {
@@ -30,16 +31,35 @@ export default class Facebook extends Component {
     window.FB.api(
       "/me",
       "GET",
-      { fields: "email,gender,hometown,id,photos{link}" },
+      { fields: "email,gender,id,photos{images}" },
       function(response) {
-        // this.setState({
-        //   imgArray: response.photos.data
-        // });
-        console.log(
-          response.photos.data.map(function(img) {
-            return img.link;
-          })
-        );
+        if (response.data) {
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+              console.log(this.responseText);
+            }
+          });
+
+          xhr.open(
+            "GET",
+            "https://api.infringement.report/2.0/list/46542/query?use_ignore_lists=false&q=*"
+          );
+          xhr.setRequestHeader("x-api-key", "d7d9c0fada0bf4294da373362b4c1f4a");
+
+          xhr.send(
+            response.photos.data.map(function(img) {
+              return img.images[0].source;
+            })
+          );
+        }
+        // console.log(
+        //   response.photos.data.map(function(img) {
+        //     return img.images[0].source;
+        //   })
+        // );
       }
     );
   };
