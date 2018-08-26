@@ -23,7 +23,7 @@ class Hero extends Component {
     email: "",
     picture: "",
     api2: [],
-    loadingAPI2: true,
+    loadingAPI2: true
   };
 
   getData = val => {
@@ -33,6 +33,7 @@ class Hero extends Component {
       name: val.name,
       email: val.email,
       picture: val.picture,
+      recognitionData: val.recognitionData,
       pages: []
     });
   };
@@ -55,8 +56,6 @@ class Hero extends Component {
       loadingAPI2: false,
       pages: temparry
     });
-
-  
   };
 
   render() {
@@ -80,8 +79,6 @@ class Hero extends Component {
               <img src={hero} alt={"hero"} className={classes.img} />
             </Grid>
           </Grid>
-
-
         </div>
 
         {this.state.loadingAPI2 ? (
@@ -89,49 +86,55 @@ class Hero extends Component {
         ) : (
           <Fragment>
             <div>
-
-              <div className={[classes.welcome, "center"].join(' ')}>
-                <img src={this.state.picture} alt={this.state.name} className={classes.picture} />
+              <div className={[classes.welcome, "center"].join(" ")}>
+                <img
+                  src={this.state.picture}
+                  alt={this.state.name}
+                  className={classes.picture}
+                />
                 <h2>Welcome {this.state.name}</h2>
                 Email: {this.state.email}
               </div>
 
-              <div className={'container'}>
-              <Grid container spacing={24}>
-                <Grid item xs={12} md={5}>
-                  <h1>Sec 1</h1>
-                </Grid>
-                <Grid item xs={12} md={7}>
-                  <h3 className={classes.centerProgress}>Callback</h3>
-                    {/* <img src={this.state.picture} height={400} /> */}
+              <div className={"container"}>
+                <Grid container spacing={24}>
+                  <Grid item xs={12} md={5}>
+                    <h1>Sec 1</h1>
+                  </Grid>
+                  <Grid item xs={12} md={7}>
+                    <h3 className={classes.centerProgress}>Callback</h3>
                     <List className={classes.centerList}>
                       {this.state.pages.map(value => (
-                        <a href={value} target="_blank" style={{"text-decoration": 'none'}}><ListItem
-                          key={value}
-                          role={undefined}
-                          dense
-                          className={classes.listItem}
+                        <a
+                          href={value}
+                          target="_blank"
+                          style={{ "text-decoration": "none" }}
                         >
-                          <ListItemText primary={value} />
-                        </ListItem>
+                          <ListItem
+                            key={value}
+                            role={undefined}
+                            dense
+                            className={classes.listItem}
+                          >
+                            <ListItemText primary={value} />
+                          </ListItem>
                         </a>
                       ))}
                     </List>
+                  </Grid>
                 </Grid>
-                
-              </Grid>
               </div>
-              
-
-
-
-
-             
               <br />
-                <h3 className={classes.centerProgress}>Data</h3>
-                <div className={classes.codeStyle}>
-                  <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
-                </div>
+              <h3 className={classes.centerProgress}>Data</h3>
+              <div className={classes.codeStyle}>
+                <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+              </div>
+              <br />
+              <img src={this.state.picture} height={50} />
+              <h3 className={classes.centerProgress}>Recognition</h3>
+              <div className={classes.codeStyle}>
+                <pre>{JSON.stringify(this.state.recognitionData, null, 2)}</pre>
+              </div>
             </div>
           </Fragment>
         )}
