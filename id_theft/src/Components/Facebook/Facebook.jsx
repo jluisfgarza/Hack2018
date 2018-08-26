@@ -6,7 +6,7 @@ export default class Facebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: false
     };
   }
 
@@ -25,8 +25,8 @@ export default class Facebook extends Component {
       picture: response.picture.data.url
     });
 
-    this.getFacebookData();
-    // this.incandescentRequest();
+    // this.getFacebookData();
+    this.incandescentRequest();
   };
 
   getFacebookData = () => {
@@ -112,7 +112,6 @@ export default class Facebook extends Component {
             console.log("ProjectID: " + projectId);
 
             client.getResults(projectId, function(data) {
-
               self.props.sendArray(data);
             });
           });
