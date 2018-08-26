@@ -5,11 +5,10 @@ const appbarStyles = theme => ({
   root: {
     marginTop: '30px',
   },
-  title:{
-  },
+  title:{},
   img:{
-    fill: '#ff0000',
-    color: colors.white,
+    height: '14px',
+    marginLeft: '5px',
   },
   appbar:{
     backgroundColor: 'transparent',
@@ -30,26 +29,33 @@ const appbarStyles = theme => ({
       margin: '0 auto',
     },
   },
-  button: {
+  
+  
+  a: {
+    textDecoration: "none",
     color: colors.white,
     marginRight: '50px',
+    display: "inline-block",
+    margin: 0,
+    padding: '10px',
     fontSize: '20px',
-    [theme.breakpoints.down("sm")]: {
-      marginRight: '5px',
-      fontSize: '14px',
+    [theme.breakpoints.only("xs")]: {
+      marginRight: '10px',
     },
   },
   notifyMe: {
     color: colors.primary,
     backgroundColor: colors.white,
     fontSize: '18px',
-    [theme.breakpoints.down("sm")]: {
-      fontSize: '14px',
-    },
+    margin: '0 10px',
+    borderRadius: '25px',
     [theme.breakpoints.only("xs")]: {
       margin: '10px 0',
     },
-  }
+  },
+  inside:{
+    margin: '20px',
+  },
 });
 
 export default appbarStyles;

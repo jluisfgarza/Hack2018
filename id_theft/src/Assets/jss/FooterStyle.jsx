@@ -1,5 +1,5 @@
 // Footer Styles
-import colors from './Colors';
+// import colors from './Colors';
 
 const footerStyle = theme => ({
   root: {},
