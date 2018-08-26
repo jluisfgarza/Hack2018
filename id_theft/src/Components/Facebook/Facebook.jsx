@@ -2,8 +2,6 @@ import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
 
-var userPhoto = "";
-
 export default class Facebook extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +27,7 @@ export default class Facebook extends Component {
       userID: response.userID,
       name: response.name,
       email: response.email,
-      picture: userPhoto
+      picture: response.picture.data.url
     });
 
     // this.getFacebookData();
@@ -88,6 +86,7 @@ export default class Facebook extends Component {
   };
 
   incandescentRequest = () => {
+    var userPhoto = "";
     var self = this;
     window.FB.api(
       "/me",
