@@ -33,33 +33,27 @@ export default class Facebook extends Component {
       "GET",
       { fields: "email,gender,id,photos{images}" },
       function(response) {
-        if (response.data) {
-          var xhr = new XMLHttpRequest();
-          xhr.withCredentials = true;
-
-          xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-              console.log(this.responseText);
-            }
-          });
-
-          xhr.open(
-            "GET",
-            "https://api.infringement.report/2.0/list/46542/query?use_ignore_lists=false&q=*"
-          );
-          xhr.setRequestHeader("x-api-key", "d7d9c0fada0bf4294da373362b4c1f4a");
-
-          xhr.send(
-            response.photos.data.map(function(img) {
-              return img.images[0].source;
-            })
-          );
+        if (response) {
+          // console.log(
+          //   response.photos.data.map(function(img) {
+          //     return img.images[0].source;
+          //   })
+          // );
+          axios
+            .post(
+              `https://api.infringement.report/2.0/search`,
+              {
+                images: response.photos.data.map(function(img) {
+                  return img.images[0].source;
+                }),
+                list_label: response.id
+              },
+              { headers: { "x-api-key": "d7d9c0fada0bf4294da373362b4c1f4a" } }
+            )
+            .then(res => {
+              console.log(res);
+            });
         }
-        // console.log(
-        //   response.photos.data.map(function(img) {
-        //     return img.images[0].source;
-        //   })
-        // );
       }
     );
   };
