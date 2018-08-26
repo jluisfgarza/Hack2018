@@ -34,6 +34,18 @@ const heroStyle = theme => ({
       marginTop: "30px"
     }
   },
+  welcome:{
+    marginTop: '150px',
+    marginBottom: '70px',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  picture:{
+    borderRadius: '50px',
+    height: '60px',
+    width: '60px',
+  },
+
   centerProgress: {
     marginLeft: "45%",
     marginRight: "0%"

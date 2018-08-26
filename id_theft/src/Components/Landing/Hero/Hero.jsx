@@ -17,13 +17,13 @@ import Facebook from "../../../Components/Facebook/Facebook";
 
 class Hero extends Component {
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     userID: "",
     name: "",
     email: "",
     picture: "",
     api2: [],
-    loadingAPI2: true
+    loadingAPI2: true,
   };
 
   getData = val => {
@@ -55,6 +55,8 @@ class Hero extends Component {
       loadingAPI2: false,
       pages: temparry
     });
+
+  
   };
 
   render() {
@@ -78,9 +80,8 @@ class Hero extends Component {
               <img src={hero} alt={"hero"} className={classes.img} />
             </Grid>
           </Grid>
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
+
+
         </div>
 
         {this.state.loadingAPI2 ? (
@@ -88,25 +89,49 @@ class Hero extends Component {
         ) : (
           <Fragment>
             <div>
-              <h3 className={classes.centerProgress}>Callback</h3>
-              {/* <img src={this.state.picture} height={400} /> */}
-              <List className={classes.centerList}>
-                {this.state.pages.map(value => (
-                  <ListItem
-                    key={value}
-                    role={undefined}
-                    dense
-                    className={classes.listItem}
-                  >
-                    <ListItemText primary={value} />
-                  </ListItem>
-                ))}
-              </List>
-              <br />
-              <h3 className={classes.centerProgress}>Code</h3>
-              <div className={classes.codeStyle}>
-                <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+
+              <div className={[classes.welcome, "center"].join(' ')}>
+                <img src={this.state.picture} alt={this.state.name} className={classes.picture} />
+                <h2>Welcome {this.state.name}</h2>
+                Email: {this.state.email}
               </div>
+
+              <div className={'container'}>
+              <Grid container spacing={24}>
+                <Grid item xs={12} md={5}>
+                  <h1>Sec 1</h1>
+                </Grid>
+                <Grid item xs={12} md={7}>
+                  <h3 className={classes.centerProgress}>Callback</h3>
+                    {/* <img src={this.state.picture} height={400} /> */}
+                    <List className={classes.centerList}>
+                      {this.state.pages.map(value => (
+                        <a href={value} target="_blank" style={{"text-decoration": 'none'}}><ListItem
+                          key={value}
+                          role={undefined}
+                          dense
+                          className={classes.listItem}
+                        >
+                          <ListItemText primary={value} />
+                        </ListItem>
+                        </a>
+                      ))}
+                    </List>
+                </Grid>
+                
+              </Grid>
+              </div>
+              
+
+
+
+
+             
+              <br />
+                <h3 className={classes.centerProgress}>Data</h3>
+                <div className={classes.codeStyle}>
+                  <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+                </div>
             </div>
           </Fragment>
         )}
