@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
 
+var userPhoto = "";
+
 export default class Facebook extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,7 @@ export default class Facebook extends Component {
   };
 
   responseFacebook = response => {
-    // console.log(response);
+    console.log(response);
 
     this.setState({
       isLoggedIn: true
@@ -27,8 +29,7 @@ export default class Facebook extends Component {
       userID: response.userID,
       name: response.name,
       email: response.email,
-      picture:
-        "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
+      picture: userPhoto
     });
 
     // this.getFacebookData();
@@ -94,6 +95,21 @@ export default class Facebook extends Component {
       { fields: "email,gender,id,photos.limit(1){images}" },
       function(response) {
         if (response) {
+          switch (response.id) {
+            // Miguel
+            case "10212917590279296":
+              userPhoto =
+                "https://pbs.twimg.com/profile_images/1033740500589637632/WSueeLQU_400x400.jpg";
+              break;
+            // Jl
+            case "10212132377681114":
+              userPhoto =
+                "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg";
+              break;
+
+            default:
+              break;
+          }
           // console.log(
           //   response.photos.data.map(function(img) {
           //     return img.images[0].source;
@@ -103,8 +119,7 @@ export default class Facebook extends Component {
             .post(
               `https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze?visualFeatures=Categories,Description,Color&details=&language=en`,
               {
-                url:
-                  "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
+                url: userPhoto
               },
               {
                 headers: {
@@ -131,7 +146,7 @@ export default class Facebook extends Component {
           //   console.log(imagenes[index]);
 
           client.addImageUrl(
-            "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
+            userPhoto
             // imagenes[index]
           );
           // }
