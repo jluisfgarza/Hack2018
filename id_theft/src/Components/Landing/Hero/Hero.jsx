@@ -1,23 +1,30 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListSubheader,
+  CircularProgress
+} from '@material-ui/core';
 // Styles
-import HeroStyle from "../../../Assets/jss/HeroStyles";
+import HeroStyle from '../../../Assets/jss/HeroStyles';
 
 // img
-import hero from "../../../Assets/img/hero.png";
+import hero from '../../../Assets/img/hero.png';
 
-import { withStyles, Grid } from "@material-ui/core";
-import Facebook from "../../../Components/Facebook/Facebook";
+import { withStyles, Grid } from '@material-ui/core';
+import Facebook from '../../../Components/Facebook/Facebook';
 
 class Hero extends Component {
   state = {
-    isLoggedIn: false,
-    userID: "",
-    name: "",
-    email: "",
-    picture: "",
-    api2: null
+    isLoggedIn: true,
+    userID: '',
+    name: '',
+    email: '',
+    picture: '',
+    api2: {},
+    loadingAPI2: true
   };
 
   getData = val => {
@@ -31,12 +38,11 @@ class Hero extends Component {
   };
 
   getArray = val => {
-
     console.log(val);
-
 
     this.setState({
       api2: val,
+      loadingAPI2: false
     });
   };
 
@@ -45,30 +51,69 @@ class Hero extends Component {
 
     return (
       <Fragment>
-        <div className={[classes.root, "container"].join(" ")}>
+        <div className={[classes.root, 'container'].join(' ')}>
           <Grid container spacing={24}>
             <Grid item xs={12} md={7}>
               <h1 className={classes.h1}>
                 Check if someone else is using your identity
               </h1>
               <h3 className={classes.h3}>
-                We use face recognition and machine learning algorithms to find
-                if someone is using your identity on the internet.
+                We use face recognition and reverse image search to find if
+                someone is using your identity on the internet.
               </h3>
               <Facebook sendData={this.getData} sendArray={this.getArray} />
             </Grid>
             <Grid item xs={12} md={5}>
-              <img src={hero} alt={"hero"} className={classes.img} />
+              <img src={hero} alt={'hero'} className={classes.img} />
             </Grid>
           </Grid>
           <img src={this.state.picture} alt={this.state.name} />
           <h2>Welcome {this.state.name}</h2>
           Email: {this.state.email}
         </div>
+              <h1>Hola</h1>
+
+              {
+                
+                Object.keys(this.state.api2).map((item, i) => (
+
+                
+                  <div>
+                    {item["pages"].forEach(element => {
+                      <h2>{element.page}</h2>
+                    })}
+                  </div>
+                  /*<div>
+                    {
+                      Object.keys(this.state.api2[item]["pages"]).map((item,i) =>{
+                        <div>
+                          <h3>hola</h3>
+                          <h3>{item}</h3>
+                        </div>
+                      })
+                    }
+                    
+                  </div>*/
+                    
+                  ))
+              }
+        {this.state.loadingAPI2 ? (
+          <CircularProgress size={50} />
+        ) : (
+          <Fragment>
+
+            <ListSubheader component="div"> Completed </ListSubheader>
+            <List dense={true}>
+              
+             
+            </List>
+          </Fragment>
+        )}
       </Fragment>
     );
   }
 }
+
 Hero.propTypes = {
   classes: PropTypes.object.isRequired
 };

@@ -2,8 +2,6 @@ import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
 
-var md5 = require("md5");
-
 export default class Facebook extends Component {
   constructor(props) {
     super(props);
@@ -101,7 +99,7 @@ export default class Facebook extends Component {
             "a0c2a625a07d0eea3f39c515dc9e8817"
           );
           client.addImageUrl(
-            "http://www.gstatic.com/tv/thumb/persons/589228/589228_v9_ba.jpg"
+            "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
             // response.photos.data.map(function(img) {
             //   return img.images[0].source;
             // })
