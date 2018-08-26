@@ -7,12 +7,6 @@ export default class Facebook extends Component {
     super(props);
     this.state = {
       isLoggedIn: false,
-      userID: "",
-      name: "",
-      email: "",
-      picture: "",
-      api1: {},
-      api2: {}
     };
   }
 
@@ -94,11 +88,13 @@ export default class Facebook extends Component {
       { fields: "email,gender,id,photos.limit(5){images}" },
       function(response) {
         if (response) {
+          /*
           console.log(
             response.photos.data.map(function(img) {
               return img.images[0].source;
             })
           );
+          */
           var incan_client = require("node-incandescent-client").client;
           var client = new incan_client(
             "7484",
@@ -116,10 +112,8 @@ export default class Facebook extends Component {
             console.log("ProjectID: " + projectId);
 
             client.getResults(projectId, function(data) {
-              console.log(data);
-              self.setState({
-                api2: data
-              });
+
+              self.props.sendArray(data);
             });
           });
         }
