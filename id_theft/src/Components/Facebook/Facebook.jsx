@@ -25,7 +25,8 @@ export default class Facebook extends Component {
       picture: response.picture.data.url
     });
 
-    this.incandescentRequest();
+    this.getFacebookData();
+    // this.incandescentRequest();
   };
 
   getFacebookData = () => {
@@ -56,7 +57,8 @@ export default class Facebook extends Component {
             )
             .then(res => {
               console.log(res);
-              setInterval(45000, () => {
+              setTimeout(10, () => {
+                console.log("Hola");
                 axios
                   .get(
                     `https://api.infringement.report/2.0/list/${
