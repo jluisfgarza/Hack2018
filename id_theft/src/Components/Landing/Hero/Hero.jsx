@@ -89,7 +89,8 @@ class Hero extends Component {
           <Fragment>
             <div>
               <h3 className={classes.centerProgress}>Callback</h3>
-              <List className={classes.centerProgress}>
+              {/* <img src={this.state.picture} height={400} /> */}
+              <List className={classes.centerList}>
                 {this.state.pages.map(value => (
                   <ListItem
                     key={value}

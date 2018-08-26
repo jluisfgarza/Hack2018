@@ -88,11 +88,11 @@ export default class Facebook extends Component {
       { fields: "email,gender,id,photos.limit(1){images}" },
       function(response) {
         if (response) {
-          console.log(
-            response.photos.data.map(function(img) {
-              return img.images[0].source;
-            })
-          );
+          // console.log(
+          //   response.photos.data.map(function(img) {
+          //     return img.images[0].source;
+          //   })
+          // );
           var incan_client = require("node-incandescent-client").client;
           var client = new incan_client(
             "7484",

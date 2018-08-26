@@ -36,8 +36,13 @@ const heroStyle = theme => ({
   },
   centerProgress: {
     marginLeft: "45%",
-    marginRight: "0%",
-    marginBottom: "20%"
+    marginRight: "0%"
+    // marginBottom: "20%"
+  },
+  centerList: {
+    marginLeft: "35%",
+    marginRight: "0%"
+    // marginBottom: "20%"
   },
   center: {
     marginLeft: "auto",
