@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // Style
 import appbarStyle from "../Assets/jss/AppbarStyle";
 // Material UI
-import { withStyles, AppBar, Toolbar  } from "@material-ui/core";
+import { withStyles, AppBar, Toolbar } from "@material-ui/core";
 
 import icons from "../Assets/img/icons.png";
 
@@ -14,10 +14,8 @@ class Navbar extends Component {
     return (
       <Fragment>
         <div className={classes.root}>
-
-        <AppBar position="static" className={classes.appbar}>
+          <AppBar position="static" className={classes.appbar}>
             <Toolbar className={classes.toolbar}>
-          
               <div className={classes.pages}>
                 <ul className={classes.ul}>
                   <a href="/">
@@ -26,7 +24,7 @@ class Navbar extends Component {
                   <a href="/api">
                     <li className={classes.a}>API</li>
                   </a>
-                  <a href="/about">
+                  {/* <a href="/about">
                     <li className={classes.a}>About</li>
                   </a>
                   <a href="/donate">
@@ -36,13 +34,11 @@ class Navbar extends Component {
                     <li className={[classes.a, classes.notifyMe].join(' ')}>
                       <span className={classes.inside}>Notify Me</span>
                     </li>
-                  </a>
+                  </a> */}
                 </ul>
               </div>
-              
             </Toolbar>
           </AppBar>
-            
         </div>
       </Fragment>
     );

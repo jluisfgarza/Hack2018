@@ -1,27 +1,27 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   CircularProgress,
   List,
   ListItem,
   ListItemText
-} from '@material-ui/core';
+} from "@material-ui/core";
 // Styles
-import HeroStyle from '../../../Assets/jss/HeroStyles';
+import HeroStyle from "../../../Assets/jss/HeroStyles";
 
 // img
-import hero from '../../../Assets/img/hero.png';
+import hero from "../../../Assets/img/hero.png";
 
-import { withStyles, Grid } from '@material-ui/core';
-import Facebook from '../../../Components/Facebook/Facebook';
+import { withStyles, Grid } from "@material-ui/core";
+import Facebook from "../../../Components/Facebook/Facebook";
 
 class Hero extends Component {
   state = {
     hide: true,
-    userID: '',
-    name: '',
-    email: '',
-    picture: '',
+    userID: "",
+    name: "",
+    email: "",
+    picture: "",
     api2: [],
     loadingAPI2: true
   };
@@ -73,7 +73,7 @@ class Hero extends Component {
 
     return (
       <Fragment>
-        <div className={[classes.root, 'container'].join(' ')}>
+        <div className={[classes.root, "container"].join(" ")}>
           <Grid container spacing={24}>
             <Grid item xs={12} md={7}>
               <h1 className={classes.h1}>
@@ -91,7 +91,7 @@ class Hero extends Component {
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <img src={hero} alt={'hero'} className={classes.img} />
+              <img src={hero} alt={"hero"} className={classes.img} />
             </Grid>
           </Grid>
         </div>
@@ -105,7 +105,7 @@ class Hero extends Component {
             ) : (
               <Fragment>
                 <div>
-                  <div className={[classes.welcome, 'center'].join(' ')}>
+                  <div className={[classes.welcome, "center"].join(" ")}>
                     <img
                       src={this.state.picture}
                       alt={this.state.name}
@@ -115,14 +115,16 @@ class Hero extends Component {
                     Email: {this.state.email}
                   </div>
 
-                  <div className={'container'}>
+                  <div className={"container"}>
                     <br />
                     <Grid container spacing={24}>
-                      <h3 className={classes.centerProgress}>Recognition</h3>
-                      <Grid item>
+                      <Grid item xs={12}>
+                        <h3 className={classes.centerProgress}>Recognition</h3>
+                      </Grid>
+                      <Grid item xs={4}>
                         <img src={this.state.picture} height={300} />
                       </Grid>
-                      <Grid item>
+                      <Grid item xs={8}>
                         <div className={classes.codeStyle}>
                           <pre>
                             {JSON.stringify(
@@ -135,17 +137,14 @@ class Hero extends Component {
                       </Grid>
                     </Grid>
                     <Grid container spacing={24}>
-                      <Grid item xs={12} md={5}>
-                        <h1>Sec 1</h1>
-                      </Grid>
-                      <Grid item xs={12} md={7}>
+                      <Grid item xs={12}>
                         <h3 className={classes.centerProgress}>Callback</h3>
                         <List className={classes.centerList}>
                           {this.state.pages.map(value => (
                             <a
                               href={value}
                               target="_blank"
-                              style={{ 'text-decoration': 'none' }}
+                              style={{ "text-decoration": "none" }}
                             >
                               <ListItem
                                 key={value}
@@ -167,6 +166,8 @@ class Hero extends Component {
                     <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
                   </div>
                 </div>
+                <br />
+                <br />
               </Fragment>
             )}
           </Fragment>
