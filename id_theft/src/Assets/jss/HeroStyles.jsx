@@ -34,6 +34,10 @@ const heroStyle = theme => ({
       marginTop: '30px',
     }
   },
+  code:{
+    margin: '0px auto 150px auto',
+    maxWidth: '500px',
+  },
   
 });
 

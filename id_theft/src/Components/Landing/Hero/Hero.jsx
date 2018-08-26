@@ -40,10 +40,21 @@ class Hero extends Component {
   getArray = val => {
     console.log(val);
 
+    Object.keys(this.state.val).map(item => 
+        for int i in item.pages => (
+          console.log(item.pages[i]);
+        
+          
+        
+     
+    ));
+
     this.setState({
       api2: val,
       loadingAPI2: false
     });
+
+  
   };
 
   render() {
@@ -75,11 +86,14 @@ class Hero extends Component {
 
         {Object.keys(this.state.api2).map(item => (
           <div>
-            {item["pages"].forEach(element => {
-              <h2>{element.page}</h2>;
-            })}
+            {for i in item.pages => {
+              
+
+            }}
           </div>
         ))}
+
+
         {this.state.loadingAPI2 ? (
           <CircularProgress size={50} />
         ) : (
