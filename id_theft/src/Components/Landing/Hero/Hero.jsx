@@ -4,7 +4,7 @@ class Hero extends Component {
   render() {
     return (
       <Fragment>
-          <h1>Hero</h1>
+        <h1>Hero</h1>
       </Fragment>
     );
   }
