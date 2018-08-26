@@ -44,3 +44,13 @@ h6 {
   width: 100%;
   margin: auto;
 }
+
+/*
+Facebook
+*/
+
+.kep-login-facebook.metro {
+  border-radius: 50px !important;
+  width: 50%;
+  min-width: 300px;
+}

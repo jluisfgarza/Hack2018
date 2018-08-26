@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import "./App.css";
 
-import Facebook from "./Components/Facebook/Facebook";
 import Navbar from "./Layout/Navbar";
 import Landing from "./Components/Landing/Landing";
 import Footer from "./Layout/Footer";
@@ -13,7 +11,6 @@ class App extends Component {
         <Navbar/>
         <Landing/>
         <Footer/>
-        <Facebook />
       </div>
     );
   }
