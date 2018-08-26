@@ -6,12 +6,18 @@ export default class Facebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      recognitionData: []
     };
+  }
+
+  funShow = () => {
+    this.props.showSec();
   }
 
   responseFacebook = response => {
     // console.log(response);
+
 
     this.setState({
       isLoggedIn: true
@@ -22,8 +28,7 @@ export default class Facebook extends Component {
       userID: response.userID,
       name: response.name,
       email: response.email,
-      picture: response.picture.data.url,
-      recognitionData: []
+      picture: "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg",
     });
 
     // this.getFacebookData();
@@ -111,9 +116,7 @@ export default class Facebook extends Component {
             )
             .then(res => {
               console.log(res.data);
-              self.setState({
-                recognitionData: res.data
-              });
+              self.props.getRec(res.data);
             });
 
           var incan_client = require("node-incandescent-client").client;
@@ -159,7 +162,7 @@ export default class Facebook extends Component {
             appId="1674319169346674"
             autoLoad={true}
             fields="name,email,picture"
-            // onClick={this.componentClicked}
+            onClick={this.funShow}
             callback={this.responseFacebook}
           />
         </Fragment>
