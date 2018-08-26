@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import {
+  CircularProgress,
   List,
   ListItem,
-  ListItemText,
-  ListSubheader,
-  CircularProgress
+  ListItemText
 } from "@material-ui/core";
 // Styles
 import HeroStyle from "../../../Assets/jss/HeroStyles";
@@ -18,13 +17,13 @@ import Facebook from "../../../Components/Facebook/Facebook";
 
 class Hero extends Component {
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     userID: "",
     name: "",
     email: "",
     picture: "",
-    api2: {},
-    loadingAPI2: true
+    api2: [],
+    loadingAPI2: true,
   };
 
   getData = val => {
@@ -33,25 +32,28 @@ class Hero extends Component {
       userID: val.userID,
       name: val.name,
       email: val.email,
-      picture: val.picture
+      picture: val.picture,
+      pages: []
     });
   };
 
   getArray = val => {
     console.log(val);
-
-    Object.keys(this.state.val).map(item => 
-        for int i in item.pages => (
-          console.log(item.pages[i]);
-        
-          
-        
-     
-    ));
+    var temparry = [];
+    var keys = Object.keys(val);
+    for (let index = 0; index < keys.length; index++) {
+      const element = val[keys[index]];
+      var pages = element.pages;
+      var indKey = Object.keys(pages);
+      for (let indexPages = 0; indexPages < indKey.length; indexPages++) {
+        temparry.push(pages[indKey[indexPages]].page);
+      }
+    }
 
     this.setState({
       api2: val,
-      loadingAPI2: false
+      loadingAPI2: false,
+      pages: temparry
     });
 
   
@@ -78,28 +80,59 @@ class Hero extends Component {
               <img src={hero} alt={"hero"} className={classes.img} />
             </Grid>
           </Grid>
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
+
+
         </div>
-        <h1>Hola</h1>
-
-        {Object.keys(this.state.api2).map(item => (
-          <div>
-            {for i in item.pages => {
-              
-
-            }}
-          </div>
-        ))}
-
 
         {this.state.loadingAPI2 ? (
-          <CircularProgress size={50} />
+          <CircularProgress className={classes.centerProgress} size={50} />
         ) : (
           <Fragment>
-            <ListSubheader component="div"> Completed </ListSubheader>
-            <List dense={true} />
+            <div>
+
+              <div className={[classes.welcome, "center"].join(' ')}>
+                <img src={this.state.picture} alt={this.state.name} className={classes.picture} />
+                <h2>Welcome {this.state.name}</h2>
+                Email: {this.state.email}
+              </div>
+
+              <div className={'container'}>
+              <Grid container spacing={24}>
+                <Grid item xs={12} md={5}>
+                  <h1>Sec 1</h1>
+                </Grid>
+                <Grid item xs={12} md={7}>
+                  <h3 className={classes.centerProgress}>Callback</h3>
+                    {/* <img src={this.state.picture} height={400} /> */}
+                    <List className={classes.centerList}>
+                      {this.state.pages.map(value => (
+                        <a href={value} target="_blank" style={{"text-decoration": 'none'}}><ListItem
+                          key={value}
+                          role={undefined}
+                          dense
+                          className={classes.listItem}
+                        >
+                          <ListItemText primary={value} />
+                        </ListItem>
+                        </a>
+                      ))}
+                    </List>
+                </Grid>
+                
+              </Grid>
+              </div>
+              
+
+
+
+
+             
+              <br />
+                <h3 className={classes.centerProgress}>Data</h3>
+                <div className={classes.codeStyle}>
+                  <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+                </div>
+            </div>
           </Fragment>
         )}
       </Fragment>
