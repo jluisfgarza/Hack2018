@@ -17,7 +17,6 @@ class Hero extends Component {
     name: "",
     email: "",
     picture: "",
-    imgArray: [],
     api2: null
   };
 
@@ -28,6 +27,16 @@ class Hero extends Component {
       name: val.name,
       email: val.email,
       picture: val.picture
+    });
+  };
+
+  getArray = val => {
+
+    console.log(val);
+
+
+    this.setState({
+      api2: val,
     });
   };
 
@@ -46,7 +55,7 @@ class Hero extends Component {
                 We use face recognition and machine learning algorithms to find
                 if someone is using your identity on the internet.
               </h3>
-              <Facebook sendData={this.getData} />
+              <Facebook sendData={this.getData} sendArray={this.getArray} />
             </Grid>
             <Grid item xs={12} md={5}>
               <img src={hero} alt={"hero"} className={classes.img} />
