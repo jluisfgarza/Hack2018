@@ -85,27 +85,28 @@ export default class Facebook extends Component {
     window.FB.api(
       "/me",
       "GET",
-      { fields: "email,gender,id,photos.limit(5){images}" },
+      { fields: "email,gender,id,photos.limit(1){images}" },
       function(response) {
         if (response) {
-          /*
           console.log(
             response.photos.data.map(function(img) {
               return img.images[0].source;
             })
           );
-          */
           var incan_client = require("node-incandescent-client").client;
           var client = new incan_client(
             "7484",
             "a0c2a625a07d0eea3f39c515dc9e8817"
           );
+          // var imagenes = response.photos.data.map(function(img) {
+          //   return img.images[0].source;
+          // });
+          // for (let index = 0; index < imagenes.length; index++) {
           client.addImageUrl(
             "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg"
-            // response.photos.data.map(function(img) {
-            //   return img.images[0].source;
-            // })
+            // imagenes[index]
           );
+          // }
           client.assemble();
 
           client.sendRequest(function(projectId) {

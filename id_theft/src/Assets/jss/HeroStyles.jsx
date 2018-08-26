@@ -34,10 +34,15 @@ const heroStyle = theme => ({
       marginTop: "30px"
     }
   },
-  center: {
+  centerProgress: {
     marginLeft: "45%",
     marginRight: "0%",
     marginBottom: "20%"
+  },
+  center: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "10%"
   },
   codeStyle: {
     marginLeft: "10%",
@@ -47,6 +52,11 @@ const heroStyle = theme => ({
     color: "black",
     backgroundColor: "lightGrey",
     overflow: "auto"
+  },
+  listItem: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
   }
 });
 

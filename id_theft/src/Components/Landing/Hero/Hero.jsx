@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import { CircularProgress } from "@material-ui/core";
+import {
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 // Styles
 import HeroStyle from "../../../Assets/jss/HeroStyles";
 
@@ -27,16 +32,28 @@ class Hero extends Component {
       userID: val.userID,
       name: val.name,
       email: val.email,
-      picture: val.picture
+      picture: val.picture,
+      pages: []
     });
   };
 
   getArray = val => {
     console.log(val);
+    var temparry = [];
+    var keys = Object.keys(val);
+    for (let index = 0; index < keys.length; index++) {
+      const element = val[keys[index]];
+      var pages = element.pages;
+      var indKey = Object.keys(pages);
+      for (let indexPages = 0; indexPages < indKey.length; indexPages++) {
+        temparry.push(pages[indKey[indexPages]].page);
+      }
+    }
 
     this.setState({
       api2: val,
-      loadingAPI2: false
+      loadingAPI2: false,
+      pages: temparry
     });
   };
 
@@ -67,11 +84,28 @@ class Hero extends Component {
         </div>
 
         {this.state.loadingAPI2 ? (
-          <CircularProgress className={classes.center} size={50} />
+          <CircularProgress className={classes.centerProgress} size={50} />
         ) : (
           <Fragment>
-            <div className={classes.codeStyle}>
-              <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+            <div>
+              <h3 className={classes.centerProgress}>Callback</h3>
+              <List className={classes.centerProgress}>
+                {this.state.pages.map(value => (
+                  <ListItem
+                    key={value}
+                    role={undefined}
+                    dense
+                    className={classes.listItem}
+                  >
+                    <ListItemText primary={value} />
+                  </ListItem>
+                ))}
+              </List>
+              <br />
+              <h3 className={classes.centerProgress}>Code</h3>
+              <div className={classes.codeStyle}>
+                <pre>{JSON.stringify(this.state.api2, null, 2)}</pre>
+              </div>
             </div>
           </Fragment>
         )}
