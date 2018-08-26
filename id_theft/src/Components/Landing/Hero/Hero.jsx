@@ -31,6 +31,11 @@ class Hero extends Component {
       hide: false
     });
   };
+  getImg = val => {
+    this.setState({
+      picture: val
+    });
+  };
 
   recData = val => {
     this.setState({
@@ -88,6 +93,7 @@ class Hero extends Component {
                 sendArray={this.getArray}
                 showSec={this.show}
                 getRec={this.recData}
+                setImg={this.getImg}
               />
             </Grid>
             <Grid item xs={12} md={5}>

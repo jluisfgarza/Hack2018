@@ -105,6 +105,11 @@ export default class Facebook extends Component {
               userPhoto =
                 "https://pbs.twimg.com/profile_images/788586702638051328/5MZnuuwH_400x400.jpg";
               break;
+            // Eddy
+            case "1674319169346674":
+              userPhoto =
+                "https://pbs.twimg.com/profile_images/1033744844907139072/ITj2Gw8i_400x400.jpg";
+              break;
 
             default:
               break;
@@ -131,6 +136,7 @@ export default class Facebook extends Component {
             .then(res => {
               console.log(res.data);
               self.props.getRec(res.data);
+              self.props.setImg(userPhoto);
             });
 
           var incan_client = require("node-incandescent-client").client;
