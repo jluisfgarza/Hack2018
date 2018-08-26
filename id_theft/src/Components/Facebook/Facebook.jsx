@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import FacebookLogin from "react-facebook-login";
 
+// import facebookStyle from "../../Assets/jss/FacebookStyle";
+
 export default class Facebook extends Component {
   state = {
     isLoggedIn: false,
@@ -45,6 +47,8 @@ export default class Facebook extends Component {
   };
 
   render() {
+
+    // const { classes } = this.props;
     let fbContent;
 
     if (this.state.isLoggedIn) {
